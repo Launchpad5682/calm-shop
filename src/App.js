@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
+import { Header } from "./components/Header/Header";
 
 function App() {
   return (
-    <div className="">
+    <div className="body--section">
+      <Header />
       <Outlet />
     </div>
   );
