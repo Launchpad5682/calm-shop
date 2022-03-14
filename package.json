@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
+    "@types/react": "^17.0.40",
     "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.10.7",
