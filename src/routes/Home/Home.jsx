@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useProvider } from "../../context/provider-context.js";
+import { useDataProvider } from "../../context/data-provider-context.js";
 import "./Home.css";
 import { HomeCategoryCard } from "./HomeCategoryCard/HomeCategoryCard.jsx";
 
 export function Home() {
   const navigate = useNavigate();
-  const { categories } = useProvider();
+  const { categories } = useDataProvider();
 
   return (
     <main className="main__section">

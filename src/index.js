@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes/AppRoutes";
-import { Provider } from "./context/provider-context";
+import { DataProvider } from "./context/data-provider-context";
 
 // Call make Server
 makeServer();
@@ -11,9 +11,9 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider>
+      <DataProvider>
         <AppRoutes />
-      </Provider>
+      </DataProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
