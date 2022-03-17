@@ -10,7 +10,11 @@ export function BadgeButton({ children, count, path }) {
 
   return (
     <button className="badge__icon badge__icon--blue" onClick={clickHandler}>
-      <span className="badge__icon--counter icon__counter--pink">{count}</span>
+      {count > 0 && (
+        <span className="badge__icon--counter icon__counter--pink">
+          {count > 10 ? "10+" : count}
+        </span>
+      )}
       {children}
     </button>
   );
