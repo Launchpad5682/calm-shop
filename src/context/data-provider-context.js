@@ -4,7 +4,7 @@ import { reducer } from "../reducer/reducer";
 
 export const DataProviderContext = createContext();
 
-export const useDataProvider = () => useContext(ProviderContext);
+export const useDataProvider = () => useContext(DataProviderContext);
 
 const initialState = {
   products: { products: [] },
