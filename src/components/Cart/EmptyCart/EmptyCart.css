@@ -1,0 +1,13 @@
+.full__page--vector {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+}
+
+.vector--container {
+  max-height: 20rem;
+  aspect-ratio: 1;
+  opacity: 70%;
+}
