@@ -6,6 +6,7 @@ export function SliderInput({
   id,
   low,
   high,
+  step,
   sliderChangeHandler,
 }) {
   return (
@@ -17,21 +18,16 @@ export function SliderInput({
         id={id}
         min={low}
         max={high}
+        step={step}
         onChange={sliderChangeHandler}
         className="input__slider input__slider--blue"
       />
       <div className="slider__label">
-        <span className="subtitle1__typography typography typography--black">
-          {low}
-        </span>
         <span
           className="subtitle1__typography typography typography--black"
           id="slider-current-value"
         >
           {value}
-        </span>
-        <span className="subtitle1__typography typography typography--black">
-          {high}
         </span>
       </div>
     </div>
