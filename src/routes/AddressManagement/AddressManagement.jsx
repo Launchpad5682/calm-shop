@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export function AddressManagement() {
-    return (
-        <div>AddressManagement</div>
-    )
+  return <div>AddressManagement</div>;
 }
