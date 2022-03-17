@@ -17,15 +17,28 @@ const initialState = {
   },
   cart: {
     products: [],
-    decrement: false,
   },
   wishlist: { products: [] },
 };
 
 export const DataProvider = ({ children }) => {
-  const [{ categories }, dispatch] = useReducer(reducer, initialState);
+  const [{ products, categories, cart, filters, wishlist }, dispatch] =
+    useReducer(reducer, initialState);
 
   useEffect(() => {
+    // fetching products
+    (async () => {
+      try {
+        const response = await axios.get("/api/products");
+
+        if (response.status === 200) {
+          dispatch({ type: "SET_PRODUCTS", payload: response.data });
+        }
+      } catch (error) {
+        console.error("Error in Product Listing", error);
+      }
+    })();
+
     // fetching categories
     (async () => {
       try {
@@ -41,7 +54,11 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   const value = {
+    products,
     categories,
+    cart,
+    filters,
+    wishlist,
     dispatch,
   };
   return (
