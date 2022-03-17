@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;400&display=swap");
+@import url("https://morpho-ui-css-docs.netlify.app/global/global.css");
+
+* {
+  /* 200 400 */
+  font-family: "Work Sans", sans-serif;
+  box-sizing: border-box;
+  --padding-xs: 1rem;
+  --padding-sm: 2rem;
+  --padding-lg: 5rem;
+  --border-radius-search: 1rem;
+}
+
+.body--section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.padding--xs {
+  padding: var(--padding-xs);
+}
+
+.padding--sm {
+  padding: var(--padding-sm);
+}
+
+.padding--sm--vertical {
+  padding: var(--padding-sm) 0;
+}
+
+.padding--lg {
+  padding: var(--padding-lg);
+}
+
+.main__section {
+  /* margin: 2rem 0; */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.full__width--btn {
+  width: 100%;
+}
