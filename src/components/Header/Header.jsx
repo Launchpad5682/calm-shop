@@ -6,11 +6,18 @@ import {
   BsFillPersonBadgeFill,
   BsSearch,
 } from "react-icons/bs";
+import { BadgeButton } from "../";
+import { useNavigate } from "react-router-dom";
+import { useDataProvider } from "../../context/data-provider-context";
 
 export function Header() {
+  const navigate = useNavigate();
+  const goToProducts = () => navigate("/");
+
+  const { wishlist } = useDataProvider();
   return (
     <header className="header header--dark">
-      <span className="logo">
+      <span className="logo cursor--pointer" onClick={goToProducts}>
         <img
           src="https://yifgzyyqlpgydlzwcsaj.supabase.in/storage/v1/object/public/calm-shop-books/calm-shop-logo.png"
           alt=""
@@ -26,20 +33,18 @@ export function Header() {
           <BsSearch />
         </span>
       </div>
+
       <nav className="">
         <ul className="nav__list">
-          <button className="badge__icon badge__icon--blue">
-            <span className="badge__icon--counter icon__counter--pink">
-              100
-            </span>
+          <BadgeButton count={wishlist.products.length} path="/wishlist">
             <BsFillHeartFill />
-          </button>
-          <button className="badge__icon badge__icon--blue">
+          </BadgeButton>
+          <BadgeButton count={10} path="/cart">
             <BsFillCartFill />
-          </button>
-          <button className="badge__icon badge__icon--blue">
+          </BadgeButton>
+          <BadgeButton count={null} path="">
             <BsFillPersonBadgeFill />
-          </button>
+          </BadgeButton>
           <button className="button--sm button__solid button--blue button__rounded--lg">
             <span className="button__typography typography--white">Logout</span>
           </button>

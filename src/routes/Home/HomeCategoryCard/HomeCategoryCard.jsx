@@ -1,13 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDataProvider } from "../../../context/data-provider-context";
 import "./HomeCategoryCard.css";
 
 export function HomeCategoryCard({ category }) {
-  const { displayName, path } = category;
-
+  const { categoryName, displayName, path } = category;
+  const { dispatch } = useDataProvider();
   const navigate = useNavigate();
   const navigateByCategory = () => {
     navigate("/products");
+    dispatch({
+      type: "FILTER_CATEGORIES",
+      payload: { value: categoryName },
+    });
   };
 
   return (

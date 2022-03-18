@@ -1,1 +1,9 @@
 export { Header } from "./Header/Header";
+export { Filters } from "./Filters/Filters";
+export { ProductCard } from "./ProductCard/ProductCard";
+export { SliderInput } from "./Input/SliderInput/SliderInput";
+export { RadioInput } from "./Input/RadioInput/RadioInput";
+export { CheckBoxInput } from "./Input/CheckBoxInput/CheckBoxInput";
+export { BadgeButton } from "./Button/BadgeButton";
+export { OutlineButton } from "./Button/OutlineButton";
+export { SolidButton } from "./Button/SolidButton";
