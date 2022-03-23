@@ -8,6 +8,8 @@ import { Home } from "./Home/Home";
 import { ProductsListing } from "./ProductsListing/ProductsListing";
 import { SingleProductPage } from "./SingleProductPage/SingleProductPage";
 import { WishList } from "./WishList/WishList";
+import { PrivateRoute } from "../helper/PrivateRoute";
+import { Login } from "./Auth/Login";
 
 export function AppRoutes() {
   return (
@@ -16,9 +18,24 @@ export function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="products" element={<ProductsListing />} />
         <Route path="/products/:id" element={<SingleProductPage />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="cart"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
         <Route path="address-management" element={<AddressManagement />} />
-        <Route path="wishlist" element={<WishList />} />
+        <Route
+          path="wishlist"
+          element={
+            <PrivateRoute>
+              <WishList />
+            </PrivateRoute>
+          }
+        />
       </Route>
       <Route path="/api/mockman" element={<MockmanEs />} />
     </Routes>
