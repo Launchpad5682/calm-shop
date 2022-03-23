@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDataProvider } from "../../context/data-provider-context.js";
+import { useDataProvider } from "../../context/data-context";
 import "./Home.css";
 import { HomeCategoryCard } from "./HomeCategoryCard/HomeCategoryCard.jsx";
 

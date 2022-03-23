@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDataProvider } from "../../../context/data-provider-context";
+import { useDataProvider } from "../../../context/data-context";
 import "./HomeCategoryCard.css";
 
 export function HomeCategoryCard({ category }) {
@@ -18,7 +18,7 @@ export function HomeCategoryCard({ category }) {
   return (
     <div className="category__card" onClick={navigateByCategory}>
       <div className="category__image">
-        <img src={path} className="image__fit" />
+        <img src={path} className="image__fit" alt="Home category card" />
       </div>
       <div className="category__card--overlay h4__typography typography--white">
         {displayName}
