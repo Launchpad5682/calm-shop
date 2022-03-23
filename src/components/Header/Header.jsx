@@ -8,13 +8,13 @@ import {
 } from "react-icons/bs";
 import { BadgeButton } from "../";
 import { useNavigate } from "react-router-dom";
-import { useDataProvider } from "../../context/data-provider-context";
+import { useDataProvider } from "../../context/data-context";
 
 export function Header() {
   const navigate = useNavigate();
   const goToProducts = () => navigate("/");
 
-  const { wishlist } = useDataProvider();
+  const { wishlist, cart } = useDataProvider();
   return (
     <header className="header header--dark">
       <span className="logo cursor--pointer" onClick={goToProducts}>
@@ -36,10 +36,10 @@ export function Header() {
 
       <nav className="">
         <ul className="nav__list">
-          <BadgeButton count={wishlist.products.length} path="/wishlist">
+          <BadgeButton count={wishlist?.length} path="/wishlist">
             <BsFillHeartFill />
           </BadgeButton>
-          <BadgeButton count={10} path="/cart">
+          <BadgeButton count={cart?.length} path="/cart">
             <BsFillCartFill />
           </BadgeButton>
           <BadgeButton count={null} path="">

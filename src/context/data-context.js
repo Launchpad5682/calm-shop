@@ -15,10 +15,8 @@ const initialState = {
     priceUpperRange: null,
     sortBy: null,
   },
-  cart: {
-    products: [],
-  },
-  wishlist: { products: [] },
+  cart: [],
+  wishlist: [],
 };
 
 export const DataProvider = ({ children }) => {

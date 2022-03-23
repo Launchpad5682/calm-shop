@@ -1,34 +1,20 @@
 import React from "react";
 import { BsFillCartFill, BsFillHeartFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 import { useCartAndWishList } from "../../hooks/useCartAndWishList";
 import { OutlineButton } from "../";
 import { SolidButton } from "../";
-import "./ProductCard.css";
-import { isProductInWishlist } from "../../utils";
-import { useDataProvider } from "../../context/data-context";
 
-export function ProductCard({ product }) {
-  const { title, author, actualPrice, discountedPrice, path } = product;
-  const { wishlist } = useDataProvider();
-  const navigate = useNavigate();
-  const { addToCart, addToWishList } = useCartAndWishList();
-  const isInWishList = isProductInWishlist(product, wishlist);
+export function WishListCard({ product }) {
+  const { title, author, discountedPrice, actualPrice, path } = product;
 
-  const navigateToSingleProductPage = () =>
-    navigate(`/products/${product._id}`);
-
+  const { addToCart, removeFromWishList } = useCartAndWishList();
   return (
     <div className="card__flexcolumn card__flexcolumn--md card__border--black shopping--card">
-      <div className="item--image" onClick={navigateToSingleProductPage}>
-        <img
-          src={path}
-          className="image--fitwidth img--fitheight"
-          alt="product card"
-        />
+      <div className="item--image">
+        <img src={path} className="image--fitwidth img--fitheight" alt="" />
       </div>
       <div className="card--detail">
-        <div className="" onClick={navigateToSingleProductPage}>
+        <div className="">
           <span className="h6__typography typography--black bold--typography">
             {title}
           </span>
@@ -40,15 +26,15 @@ export function ProductCard({ product }) {
               Rs {discountedPrice}
             </span>
             <span className="subtitle1__typography typography--black strike__line">
-              Rs {actualPrice}
+              {actualPrice}
             </span>
           </div>
         </div>
         <div className="card--btns">
           <OutlineButton
-            caption={isInWishList ? "In a Wishlist" : "Add to Wishlist"}
+            caption="Remove from Wishlist"
             icon={<BsFillHeartFill />}
-            clickHandler={() => addToWishList(product)}
+            clickHandler={() => removeFromWishList(product)}
           />
           <SolidButton
             caption="Add to Cart"

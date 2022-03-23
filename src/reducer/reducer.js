@@ -61,103 +61,10 @@ export const reducer = (state, action) => {
           sortBy: null,
         },
       };
-    case "ADD_TO_CART": {
-      const found = state.cart.products.find(
-        (product) => product._id === action.payload.product._id
-      );
-      if (found) {
-        return state;
-      }
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          products: [
-            ...state.cart.products,
-            { ...action.payload.product, quantity: 1 },
-          ],
-        },
-      };
-    }
-    case "INCREASE_QUANTITY_PRODUCT_IN_CART":
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          products: [
-            ...state.cart.products.map((product) => {
-              if (product._id === action.payload.product._id) {
-                return {
-                  ...product,
-                  quantity: Number(product.quantity) + 1,
-                };
-              }
-              return product;
-            }),
-          ],
-        },
-      };
-    case "DECREASE_QUANTITY_PRODUCT_IN_CART":
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          products: [
-            ...state.cart.products.map((product) => {
-              if (product._id === action.payload.product._id) {
-                return {
-                  ...product,
-                  quantity:
-                    Number(product.quantity) > 1
-                      ? Number(product.quantity) - 1
-                      : Number(product.quantity),
-                };
-              }
-              return product;
-            }),
-          ],
-        },
-      };
-    case "REMOVE_FROM_CART":
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          products: [
-            ...state.cart.products.filter(
-              (product) => product._id !== action.payload._id
-            ),
-          ],
-        },
-      };
-    case "ADD_TO_WISHLIST": {
-      const found = state.wishlist.products.find(
-        (product) => product._id === action.payload._id
-      );
-      if (found) {
-        return state;
-      }
-      return {
-        ...state,
-        wishlist: {
-          ...state.wishlist,
-          products: [...state.wishlist.products, { ...action.payload }],
-        },
-      };
-    }
-
-    case "REMOVE_FROM_WISHLIST":
-      return {
-        ...state,
-        wishlist: {
-          ...state.wishlist,
-          products: [
-            ...state.wishlist.products.filter(
-              (product) => product._id !== action.payload._id
-            ),
-          ],
-        },
-      };
+    case "SET_CART":
+      return { ...state, cart: action.payload };
+    case "SET_WISHLIST":
+      return { ...state, wishlist: action.payload };
     default:
       return state;
   }

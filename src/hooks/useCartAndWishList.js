@@ -1,31 +1,112 @@
-import { useDataProvider } from "../context/data-provider-context";
+import axios from "axios";
+import { useDataProvider } from "../context/data-context";
+import { useAuthProvider } from "../context/auth-context";
+import { isProductInCart, isProductInWishlist } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 export function useCartAndWishList() {
-  const { dispatch } = useDataProvider();
+  const { cart, wishlist, dispatch } = useDataProvider();
+  const { token } = useAuthProvider();
+  const navigate = useNavigate();
 
-  const addToCart = (product) =>
-    dispatch({ type: "ADD_TO_CART", payload: { product: product } });
+  const addToCart = async (product) => {
+    if (isProductInCart(product, cart)) {
+      navigate("/cart");
+    } else {
+      try {
+        const response = await axios.post(
+          "/api/user/cart",
+          { product: product },
+          { headers: { authorization: token } }
+        );
+        if (response.status === 201) {
+          dispatch({ type: "SET_CART", payload: response.data.cart });
+        }
+      } catch (error) {
+        console.error("Error while loading cart");
+      }
+    }
+  };
 
-  const increaseQuantity = (product) =>
-    dispatch({
-      type: "INCREASE_QUANTITY_PRODUCT_IN_CART",
-      payload: { product: product },
-    });
+  const increaseQuantity = async (product) => {
+    try {
+      const response = await axios.post(
+        `/api/user/cart/${product._id}`,
+        { action: { type: "increment" } },
+        { headers: { authorization: token } }
+      );
+      if (response.status === 200) {
+        dispatch({ type: "SET_CART", payload: response.data.cart });
+      }
+    } catch (error) {
+      console.error("Error while loading cart");
+    }
+  };
 
-  const decreaseQuantity = (product) =>
-    dispatch({
-      type: "DECREASE_QUANTITY_PRODUCT_IN_CART",
-      payload: { product: product },
-    });
+  const decreaseQuantity = async (product) => {
+    if (product.qty === 1) {
+      removeFromCart(product);
+    } else {
+      try {
+        const response = await axios.post(
+          `/api/user/cart/${product._id}`,
+          { action: { type: "decrement" } },
+          { headers: { authorization: token } }
+        );
 
-  const removeFromCart = (product) =>
-    dispatch({ type: "REMOVE_FROM_CART", payload: product });
+        if (response.status === 200) {
+          dispatch({ type: "SET_CART", payload: response.data.cart });
+        }
+      } catch (error) {
+        console.error("Error while loading cart");
+      }
+    }
+  };
 
-  const addToWishList = (product) =>
-    dispatch({ type: "ADD_TO_WISHLIST", payload: product });
+  const removeFromCart = async (product) => {
+    try {
+      const response = await axios.delete(`/api/user/cart/${product._id}`, {
+        headers: { authorization: token },
+      });
+      dispatch({ type: "SET_CART", payload: response.data.cart });
+    } catch (error) {
+      console.error("Error while loading cart");
+    }
+  };
 
-  const removeFromWishList = (product) =>
-    dispatch({ type: "REMOVE_FROM_WISHLIST", payload: product });
+  const addToWishList = async (product) => {
+    if (isProductInWishlist(product, wishlist)) {
+      removeFromWishList(product);
+    } else {
+      try {
+        const response = await axios.post(
+          "/api/user/wishlist",
+          { product: product },
+          { headers: { authorization: token } }
+        );
+        if (response.status === 201) {
+          dispatch({
+            type: "SET_WISHLIST",
+            payload: response.data.wishlist,
+          });
+        }
+      } catch (error) {
+        console.error("Error while loading cart");
+      }
+    }
+  };
+  const removeFromWishList = async (product) => {
+    try {
+      const response = await axios.delete(`/api/user/wishlist/${product._id}`, {
+        headers: { authorization: token },
+      });
+      if (response.status === 200) {
+        dispatch({ type: "SET_WISHLIST", payload: response.data.wishlist });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return {
     addToCart,

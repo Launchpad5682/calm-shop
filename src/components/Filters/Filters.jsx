@@ -1,5 +1,5 @@
 import React from "react";
-import { useDataProvider } from "../../context/data-provider-context";
+import { useDataProvider } from "../../context/data-context";
 import { CheckBoxInput } from "../";
 import { RadioInput } from "../";
 import { SliderInput } from "../";

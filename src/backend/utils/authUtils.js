@@ -1,6 +1,6 @@
 import { Response } from "miragejs";
-const jwt = require("jsonwebtoken");
 import dayjs from "dayjs";
+const jwt = require("jsonwebtoken");
 
 export const requiresAuth = function (request) {
   const encodedToken = request.requestHeaders.authorization;

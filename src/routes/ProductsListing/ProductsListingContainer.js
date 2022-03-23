@@ -1,4 +1,4 @@
-import { useDataProvider } from "../../context/data-provider-context";
+import { useDataProvider } from "../../context/data-context";
 
 export function ProductsListingContainer() {
   const { products, filters } = useDataProvider();
