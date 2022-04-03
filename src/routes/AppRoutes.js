@@ -10,6 +10,7 @@ import { SingleProductPage } from "./SingleProductPage/SingleProductPage";
 import { WishList } from "./WishList/WishList";
 import { PrivateRoute } from "../helper/PrivateRoute";
 import { Login } from "./Auth/Login";
+import { User } from "./User/User";
 
 export function AppRoutes() {
   return (
@@ -19,23 +20,12 @@ export function AppRoutes() {
         <Route path="products" element={<ProductsListing />} />
         <Route path="/products/:id" element={<SingleProductPage />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="cart"
-          element={
-            <PrivateRoute>
-              <Cart />
-            </PrivateRoute>
-          }
-        />
-        <Route path="address-management" element={<AddressManagement />} />
-        <Route
-          path="wishlist"
-          element={
-            <PrivateRoute>
-              <WishList />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="cart" element={<Cart />} />
+          <Route path="address-management" element={<AddressManagement />} />
+          <Route path="wishlist" element={<WishList />} />
+          <Route path="user" element={<User />} />
+        </Route>
       </Route>
       <Route path="/api/mockman" element={<MockmanEs />} />
     </Routes>
