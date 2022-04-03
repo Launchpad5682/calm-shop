@@ -17,11 +17,14 @@ const initialState = {
   },
   cart: [],
   wishlist: [],
+  addresses: [],
 };
 
 export const DataProvider = ({ children }) => {
-  const [{ products, categories, cart, filters, wishlist }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { products, categories, cart, filters, wishlist, addresses },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   useEffect(() => {
     // fetching products
@@ -57,6 +60,7 @@ export const DataProvider = ({ children }) => {
     cart,
     filters,
     wishlist,
+    addresses,
     dispatch,
   };
   return (
