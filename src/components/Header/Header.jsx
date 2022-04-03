@@ -42,12 +42,9 @@ export function Header() {
           <BadgeButton count={cart?.length} path="/cart">
             <BsFillCartFill />
           </BadgeButton>
-          <BadgeButton count={null} path="">
+          <BadgeButton count={null} path="/user">
             <BsFillPersonBadgeFill />
           </BadgeButton>
-          <button className="button--sm button__solid button--blue button__rounded--lg">
-            <span className="button__typography typography--white">Logout</span>
-          </button>
         </ul>
       </nav>
     </header>

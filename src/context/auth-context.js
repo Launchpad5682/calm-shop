@@ -37,6 +37,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const value = { user, token, login };
+  const logout = () => {
+    localStorage.clear();
+    setToken(null);
+    setUser(null);
+  };
+
+  const value = { user, token, login, logout };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
