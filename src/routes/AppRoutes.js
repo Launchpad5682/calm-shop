@@ -11,6 +11,7 @@ import { WishList } from "./WishList/WishList";
 import { PrivateRoute } from "../helper/PrivateRoute";
 import { Login } from "./Auth/Login";
 import { User } from "./User/User";
+import { Checkout } from "./Checkout/Checkout";
 
 export function AppRoutes() {
   return (
@@ -25,7 +26,9 @@ export function AppRoutes() {
           <Route path="address-management" element={<AddressManagement />} />
           <Route path="wishlist" element={<WishList />} />
           <Route path="user" element={<User />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
+        <Route path="*" element={<>404 page not found</>} />
       </Route>
       <Route path="/api/mockman" element={<MockmanEs />} />
     </Routes>
