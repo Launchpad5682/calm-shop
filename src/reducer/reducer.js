@@ -69,6 +69,11 @@ export const reducer = (state, action) => {
       return { ...state, modal: !state.modal };
     case "SET_ADDRESSES":
       return { ...state, addresses: action.payload };
+    case "SET_SELECTED_ADDRESS":
+      return {
+        ...state,
+        selectedAddress: { ...state.selectedAddress, ...action.payload },
+      };
     default:
       return state;
   }
