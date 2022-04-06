@@ -12,8 +12,8 @@ export function User() {
   return (
     <div className="user__profile--section">
       <div className="card__flexrow card__flexrow--lg card__shadow--black">
-        <div class="user__profile--container">
-          <div class="h6__typography typography--black">
+        <div className="user__profile--container">
+          <div className="h6__typography typography--black">
             Name: {firstName} {lastName}
           </div>
           <div className="h6__typography typography--black">Email: {email}</div>
