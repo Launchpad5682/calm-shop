@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthProvider } from "../../context/auth-context";
 import { useDataProvider } from "../../context/data-context";
 import { getCartTotal } from "../../utils";
 import { SolidButton } from "../Button/SolidButton";
@@ -8,17 +9,70 @@ export function TotalPriceCard({ type }) {
   const {
     cart,
     order: { address },
+    dispatch,
   } = useDataProvider();
+  const {
+    user: { firstName, lastName, email },
+  } = useAuthProvider();
 
   const { name, street, city, state, country, zipCode, mobile } = address;
   const cartTotal = getCartTotal(cart);
   const { totalActualPrice, totalPrice, saved, count } = cartTotal;
   const navigate = useNavigate();
-  const { dispatch } = useDataProvider();
 
   const navigateToCheckout = () => {
     navigate("/checkout");
     dispatch({ type: "UPDATE_TOTAL", payload: totalPrice });
+  };
+
+  const loadScript = async (url) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = url;
+
+      script.onload = () => {
+        resolve(true);
+      };
+
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  const displayRazorpay = async () => {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      console.error("Razorpay SDK failed to load, check you connection");
+      return;
+    }
+
+    const options = {
+      key: "rzp_test_HMKF0KGT3EISBm",
+      amount: totalPrice * 100,
+      currency: "INR",
+      name: "Calm Shop",
+      description: "Thank you for shopping with us",
+      image:
+        "https://yifgzyyqlpgydlzwcsaj.supabase.in/storage/v1/object/public/calm-shop-books/calm-shop-logo.png",
+      handler: function (response) {
+        navigate("/order-summary");
+      },
+      prefill: {
+        name: `${firstName} ${lastName}`,
+        email: email,
+        contact: "9999994444",
+      },
+      theme: {
+        color: "#007bb5",
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
   };
 
   return (
@@ -58,7 +112,11 @@ export function TotalPriceCard({ type }) {
         )}
         <SolidButton
           caption={type === "cart" ? "Checkout" : "Place the order"}
-          clickHandler={type === "cart" ? () => navigateToCheckout() : () => {}}
+          clickHandler={
+            type === "cart"
+              ? () => navigateToCheckout()
+              : () => displayRazorpay()
+          }
         />
       </div>
     </div>
