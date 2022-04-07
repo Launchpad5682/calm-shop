@@ -32,7 +32,9 @@ const initialState = {
     },
     totalPrice: null,
   },
+  loading: { products: false },
   selectedAddress: { id: null, edit: false },
+  alert: { message: null, active: true, color: "green" },
 };
 
 export const DataProvider = ({ children }) => {
@@ -48,6 +50,8 @@ export const DataProvider = ({ children }) => {
       modal,
       order,
       selectedAddress,
+      loading,
+      alert,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -56,10 +60,22 @@ export const DataProvider = ({ children }) => {
     // fetching products
     (async () => {
       try {
+        setTimeout(() => {
+          dispatch({
+            type: "TOGGLE_LOADING",
+            payload: { products: true },
+          });
+        }, 2000);
         const response = await axios.get("/api/products");
 
         if (response.status === 200) {
           dispatch({ type: "SET_PRODUCTS", payload: response.data });
+          setTimeout(() => {
+            dispatch({
+              type: "TOGGLE_LOADING",
+              payload: { products: false },
+            });
+          }, 2000);
         }
       } catch (error) {
         console.error("Error in Product Listing", error);
@@ -91,6 +107,8 @@ export const DataProvider = ({ children }) => {
     modal,
     order,
     selectedAddress,
+    loading,
+    alert,
     dispatch,
   };
   return (
