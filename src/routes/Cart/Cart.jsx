@@ -1,16 +1,13 @@
 // import axios from "axios";
 import React from "react";
-import { CartPriceCard } from "../../components/";
 import { EmptyCart } from "../../components/";
 import { ProductCartCard } from "../../components/";
+import { TotalPriceCard } from "../../components";
 import { useDataProvider } from "../../context/data-context";
-import { getCartTotal } from "../../utils/";
 import "./Cart.css";
 
 export function Cart() {
   const { cart } = useDataProvider();
-
-  const cartTotal = getCartTotal(cart);
 
   return (
     <main className="cart__section padding--sm">
@@ -22,7 +19,7 @@ export function Cart() {
             ))}
           </div>
           <div>
-            <CartPriceCard cartTotal={cartTotal} />
+            <TotalPriceCard type="cart" />
           </div>
         </>
       ) : (
