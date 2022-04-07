@@ -18,11 +18,35 @@ const initialState = {
   cart: [],
   wishlist: [],
   addresses: [],
+  modal: false,
+  order: {
+    address: {
+      name: null,
+      street: null,
+      city: null,
+      state: null,
+      country: null,
+      zipCode: null,
+      mobile: null,
+    },
+    totalPrice: null,
+  },
+  selectedAddress: { id: null, edit: false },
 };
 
 export const DataProvider = ({ children }) => {
   const [
-    { products, categories, cart, filters, wishlist, addresses },
+    {
+      products,
+      categories,
+      cart,
+      filters,
+      wishlist,
+      addresses,
+      modal,
+      order,
+      selectedAddress,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -61,6 +85,9 @@ export const DataProvider = ({ children }) => {
     filters,
     wishlist,
     addresses,
+    modal,
+    order,
+    selectedAddress,
     dispatch,
   };
   return (
