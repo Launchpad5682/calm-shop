@@ -14,8 +14,8 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorageToken?.token);
 
   const login = async (
-    email = "adarshbalika@gmail.com",
-    password = "adarshBalika123"
+    email = "saurabhsuthar@gmail.com",
+    password = "qwerty1234"
   ) => {
     try {
       const response = await axios.post("/api/auth/login", {
@@ -37,6 +37,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const value = { user, token, login };
+  const logout = () => {
+    localStorage.clear();
+    setToken(null);
+    setUser(null);
+  };
+
+  const value = { user, token, login, logout };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -4,7 +4,10 @@ import { useAuthProvider } from "../../context/auth-context";
 import "./Auth.css";
 
 export function Login() {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({
+    email: "saurabhsuthar@gmail.com",
+    password: "qwerty1234",
+  });
   const { login, token } = useAuthProvider();
   const navigate = useNavigate();
 

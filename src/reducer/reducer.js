@@ -65,6 +65,22 @@ export const reducer = (state, action) => {
       return { ...state, cart: action.payload };
     case "SET_WISHLIST":
       return { ...state, wishlist: action.payload };
+    case "TOGGLE_MODAL":
+      return { ...state, modal: !state.modal };
+    case "SET_ADDRESSES":
+      return { ...state, addresses: action.payload };
+    case "SET_SELECTED_ADDRESS":
+      return {
+        ...state,
+        selectedAddress: { ...state.selectedAddress, ...action.payload },
+      };
+    case "SET_ORDER_ADDRESS":
+      return { ...state, order: { ...state.order, address: action.payload } };
+    case "UPDATE_TOTAL":
+      return {
+        ...state,
+        order: { ...state.order, totalPrice: action.payload },
+      };
     default:
       return state;
   }
