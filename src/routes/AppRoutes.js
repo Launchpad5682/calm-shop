@@ -13,6 +13,7 @@ import { Login } from "./Auth/Login";
 import { User } from "./User/User";
 import { Checkout } from "./Checkout/Checkout";
 import { OrderSummary } from "./OrderSummary/OrderSummary";
+import { Signup } from "./Auth/Signup";
 
 export function AppRoutes() {
   return (
@@ -22,6 +23,7 @@ export function AppRoutes() {
         <Route path="products" element={<ProductsListing />} />
         <Route path="/products/:id" element={<SingleProductPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<PrivateRoute />}>
           <Route path="cart" element={<Cart />} />
           <Route path="address-management" element={<AddressManagement />} />
