@@ -12,6 +12,7 @@ import { PrivateRoute } from "../helper/PrivateRoute";
 import { Login } from "./Auth/Login";
 import { User } from "./User/User";
 import { Checkout } from "./Checkout/Checkout";
+import { OrderSummary } from "./OrderSummary/OrderSummary";
 
 export function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ export function AppRoutes() {
           <Route path="wishlist" element={<WishList />} />
           <Route path="user" element={<User />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="order-summary" element={<OrderSummary />} />
         </Route>
         <Route path="*" element={<>404 page not found</>} />
       </Route>

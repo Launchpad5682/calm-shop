@@ -27,10 +27,15 @@ export const AuthProvider = ({ children }) => {
         const {
           data: { foundUser, encodedToken },
         } = response;
+        const user = {
+          firstName: foundUser.firstName,
+          lastName: foundUser.lastName,
+          email: foundUser.email,
+        };
         setToken(encodedToken);
-        setUser(foundUser);
+        setUser(user);
         localStorage.setItem("login", JSON.stringify({ token: encodedToken }));
-        localStorage.setItem("user", JSON.stringify({ user: foundUser }));
+        localStorage.setItem("user", JSON.stringify({ user: user }));
       }
     } catch (err) {
       console.error(err);

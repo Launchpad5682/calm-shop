@@ -1,37 +1,36 @@
 .shopping--card {
-    height: 45rem;
-    max-height: 45rem;
-  }
-  
-  .item--image {
-    min-height: 05rem;
-    height: 30rem;
-    max-height: 30rem;
-  }
-  
-  .img--fitheight {
-    height: 100%;
-  }
-  
-  .card--detail {
-    padding: 3px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .card--btns {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .card-btn {
-    width: 100%;
-  }
-  
-  .card--price {
-    display: flex;
-    gap: 4px;
-  }
-  
+  height: 45rem;
+  max-height: 45rem;
+}
+
+.item--image {
+  min-height: 05rem;
+  height: 30rem;
+  max-height: 30rem;
+}
+
+.img--fitheight {
+  height: 100%;
+}
+
+.card--detail {
+  padding: 3px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.card--btns {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.card-btn {
+  width: 100%;
+}
+
+.card--price {
+  display: flex;
+  gap: 4px;
+}
