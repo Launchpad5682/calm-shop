@@ -12,11 +12,11 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <DataProvider>
+      <DataProvider>
+        <AuthProvider>
           <AppRoutes />
-        </DataProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </DataProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

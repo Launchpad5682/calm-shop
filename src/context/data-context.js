@@ -34,7 +34,7 @@ const initialState = {
   },
   loading: { products: false },
   selectedAddress: { id: null, edit: false },
-  alert: { message: null, active: true, color: "green" },
+  alert: { message: null, active: false, color: "green" },
 };
 
 export const DataProvider = ({ children }) => {
