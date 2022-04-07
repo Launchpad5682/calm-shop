@@ -81,6 +81,24 @@ export const reducer = (state, action) => {
         ...state,
         order: { ...state.order, totalPrice: action.payload },
       };
+    case "SET_SEARCH":
+      return { ...state, searchTerm: action.payload };
+    case "TOGGLE_LOADING":
+      return { ...state, loading: { ...action.payload } };
+    case "ACTIVATE_ALERT":
+      return {
+        ...state,
+        alert: {
+          message: action.payload.message,
+          active: true,
+          color: action.payload.color,
+        },
+      };
+    case "DEACTIVATE_ALERT":
+      return {
+        ...state,
+        alert: { message: null, active: false, color: "green" },
+      };
     default:
       return state;
   }
