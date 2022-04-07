@@ -17,6 +17,7 @@ const initialState = {
   },
   cart: [],
   wishlist: [],
+  searchTerm: "",
   addresses: [],
   modal: false,
   order: {
@@ -42,6 +43,7 @@ export const DataProvider = ({ children }) => {
       cart,
       filters,
       wishlist,
+      searchTerm,
       addresses,
       modal,
       order,
@@ -84,6 +86,7 @@ export const DataProvider = ({ children }) => {
     cart,
     filters,
     wishlist,
+    searchTerm,
     addresses,
     modal,
     order,
