@@ -1,7 +1,7 @@
 import { useDataProvider } from "../../context/data-context";
 
 export function useProductsListing() {
-  const { products, filters, searchTerm } = useDataProvider();
+  const { products, filters, searchTerm, loading } = useDataProvider();
   const { sortBy, priceUpperRange, filterRating, categories } = filters;
 
   const sortProducts = (products) => {
@@ -77,5 +77,5 @@ export function useProductsListing() {
 
   const processedProducts = searchProducts(filteredProducts, searchTerm);
 
-  return { processedProducts };
+  return { processedProducts, loading };
 }
