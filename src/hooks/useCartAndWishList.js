@@ -10,21 +10,32 @@ export function useCartAndWishList() {
   const navigate = useNavigate();
 
   const addToCart = async (product) => {
-    if (isProductInCart(product, cart)) {
-      navigate("/cart");
-    } else {
-      try {
-        const response = await axios.post(
-          "/api/user/cart",
-          { product: product },
-          { headers: { authorization: token } }
-        );
-        if (response.status === 201) {
-          dispatch({ type: "SET_CART", payload: response.data.cart });
+    if (token) {
+      if (isProductInCart(product, cart)) {
+        navigate("/cart");
+      } else {
+        try {
+          const response = await axios.post(
+            "/api/user/cart",
+            { product: product },
+            { headers: { authorization: token } }
+          );
+          if (response.status === 201) {
+            dispatch({ type: "SET_CART", payload: response.data.cart });
+            dispatch({
+              type: "ACTIVATE_ALERT",
+              payload: { message: "Item added to cart", color: "green" },
+            });
+          }
+        } catch (error) {
+          console.error("Error while loading cart");
         }
-      } catch (error) {
-        console.error("Error while loading cart");
       }
+    } else {
+      dispatch({
+        type: "ACTIVATE_ALERT",
+        payload: { message: "You need to login", color: "red" },
+      });
     }
   };
 
@@ -69,30 +80,45 @@ export function useCartAndWishList() {
         headers: { authorization: token },
       });
       dispatch({ type: "SET_CART", payload: response.data.cart });
+      dispatch({
+        type: "ACTIVATE_ALERT",
+        payload: { message: "Item removed from wishlist", color: "red" },
+      });
     } catch (error) {
       console.error("Error while loading cart");
     }
   };
 
   const addToWishList = async (product) => {
-    if (isProductInWishlist(product, wishlist)) {
-      removeFromWishList(product);
-    } else {
-      try {
-        const response = await axios.post(
-          "/api/user/wishlist",
-          { product: product },
-          { headers: { authorization: token } }
-        );
-        if (response.status === 201) {
-          dispatch({
-            type: "SET_WISHLIST",
-            payload: response.data.wishlist,
-          });
+    if (token) {
+      if (isProductInWishlist(product, wishlist)) {
+        removeFromWishList(product);
+      } else {
+        try {
+          const response = await axios.post(
+            "/api/user/wishlist",
+            { product: product },
+            { headers: { authorization: token } }
+          );
+          if (response.status === 201) {
+            dispatch({
+              type: "SET_WISHLIST",
+              payload: response.data.wishlist,
+            });
+            dispatch({
+              type: "ACTIVATE_ALERT",
+              payload: { message: "Item added to wishlist", color: "green" },
+            });
+          }
+        } catch (error) {
+          console.error("Error while loading cart");
         }
-      } catch (error) {
-        console.error("Error while loading cart");
       }
+    } else {
+      dispatch({
+        type: "ACTIVATE_ALERT",
+        payload: { message: "You need to login", color: "red" },
+      });
     }
   };
   const removeFromWishList = async (product) => {
@@ -102,6 +128,10 @@ export function useCartAndWishList() {
       });
       if (response.status === 200) {
         dispatch({ type: "SET_WISHLIST", payload: response.data.wishlist });
+        dispatch({
+          type: "ACTIVATE_ALERT",
+          payload: { message: "Item removed from wishlist", color: "red" },
+        });
       }
     } catch (error) {
       console.error(error);

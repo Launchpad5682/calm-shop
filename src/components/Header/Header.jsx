@@ -4,11 +4,11 @@ import {
   BsFillCartFill,
   BsFillHeartFill,
   BsFillPersonBadgeFill,
-  BsSearch,
 } from "react-icons/bs";
 import { BadgeButton } from "../";
 import { useNavigate } from "react-router-dom";
 import { useDataProvider } from "../../context/data-context";
+import { SearchBar } from "../SearchBar/SearchBar";
 
 export function Header() {
   const navigate = useNavigate();
@@ -27,13 +27,7 @@ export function Header() {
           Calm Shop
         </h6>
       </span>
-      <div className="search__container">
-        <input type="text" name="" id="" className="search__input" />
-        <span className="search__btn">
-          <BsSearch />
-        </span>
-      </div>
-
+      <SearchBar />
       <nav className="">
         <ul className="nav__list">
           <BadgeButton count={wishlist?.length} path="/wishlist">

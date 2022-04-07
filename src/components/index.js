@@ -1,3 +1,4 @@
+export { Alert } from "./Alert/Alert";
 export { Header } from "./Header/Header";
 export { Filters } from "./Filters/Filters";
 export { FieldInput } from "./Input/FieldInput/FieldInput";
@@ -6,9 +7,11 @@ export { SliderInput } from "./Input/SliderInput/SliderInput";
 export { RadioInput } from "./Input/RadioInput/RadioInput";
 export { CheckBoxInput } from "./Input/CheckBoxInput/CheckBoxInput";
 export { BadgeButton } from "./Button/BadgeButton";
+export { Loader } from "./Loader/Loader";
 export { OutlineButton } from "./Button/OutlineButton";
 export { SolidButton } from "./Button/SolidButton";
 export { EmptyCart } from "./Cart/EmptyCart/EmptyCart";
 export { ProductCartCard } from "./Cart/ProductCartCard/ProductCartCard";
+export { SearchBar } from "./SearchBar/SearchBar";
 export { TotalPriceCard } from "./TotalPriceCard/TotalPriceCard";
 export { WishListCard } from "./WishListCard/WishListCard";

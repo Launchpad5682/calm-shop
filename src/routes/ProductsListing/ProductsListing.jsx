@@ -1,11 +1,11 @@
 import "./ProductsListing.css";
 import React from "react";
-import { Filters } from "../../components";
+import { Filters, Loader } from "../../components";
 import { ProductCard } from "../../components";
-import { ProductsListingContainer } from "./ProductsListingContainer";
+import { useProductsListing } from "./useProductsListing";
 
 export function ProductsListing() {
-  const { processedProducts } = ProductsListingContainer();
+  const { loading, processedProducts } = useProductsListing();
 
   return (
     <div className="main--section">
@@ -22,7 +22,9 @@ export function ProductsListing() {
             <span className="button__typography typography--black">Filter</span>
           </button>
         </div>
-        {processedProducts.length > 0 ? (
+        {loading.products ? (
+          <Loader />
+        ) : processedProducts.length > 0 ? (
           <div className="grid-4-item padding--sm--vertical">
             {processedProducts?.map((product) => (
               <ProductCard product={product} key={product._id} />
