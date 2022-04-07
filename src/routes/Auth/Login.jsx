@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../../context/auth-context";
 import "./Auth.css";
 
@@ -10,6 +10,9 @@ export function Login() {
   });
   const { login, loading, token } = useAuthProvider();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const loginHandler = (event) => {
     event.preventDefault();
@@ -18,9 +21,9 @@ export function Login() {
 
   useEffect(() => {
     if (token) {
-      navigate("/");
+      navigate(from);
     }
-  }, [token, navigate]);
+  }, [token, from, navigate]);
 
   const changeHandler = (event) => {
     const type = event.target.type;
