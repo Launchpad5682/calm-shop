@@ -2,10 +2,10 @@ import "./ProductsListing.css";
 import React from "react";
 import { Filters } from "../../components";
 import { ProductCard } from "../../components";
-import { ProductsListingContainer } from "./ProductsListingContainer";
+import { useProductsListing } from "./useProductsListing";
 
 export function ProductsListing() {
-  const { processedProducts } = ProductsListingContainer();
+  const { processedProducts } = useProductsListing();
 
   return (
     <div className="main--section">

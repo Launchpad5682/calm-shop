@@ -1,7 +1,7 @@
 import { useDataProvider } from "../../context/data-context";
 
-export function ProductsListingContainer() {
-  const { products, filters } = useDataProvider();
+export function useProductsListing() {
+  const { products, filters, searchTerm } = useDataProvider();
   const { sortBy, priceUpperRange, filterRating, categories } = filters;
 
   const sortProducts = (products) => {
@@ -57,15 +57,25 @@ export function ProductsListingContainer() {
     return products;
   };
 
+  const searchProducts = (products, searchTerm) => {
+    return products.filter((video) =>
+      video.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
+
   const sortedProducts = sortProducts(products?.products);
   const ratingFilteredProducts = ratingFilter(sortedProducts, filterRating);
   const categoryFilteredProducts = categoryFilter(
     ratingFilteredProducts,
     categories
   );
-  const processedProducts = productsInRange(
+
+  const filteredProducts = productsInRange(
     categoryFilteredProducts,
     priceUpperRange
   );
+
+  const processedProducts = searchProducts(filteredProducts, searchTerm);
+
   return { processedProducts };
 }
