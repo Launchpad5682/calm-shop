@@ -74,6 +74,13 @@ export const reducer = (state, action) => {
         ...state,
         selectedAddress: { ...state.selectedAddress, ...action.payload },
       };
+    case "SET_ORDER_ADDRESS":
+      return { ...state, order: { ...state.order, address: action.payload } };
+    case "UPDATE_TOTAL":
+      return {
+        ...state,
+        order: { ...state.order, totalPrice: action.payload },
+      };
     default:
       return state;
   }
