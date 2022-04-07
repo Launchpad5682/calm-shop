@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../../context/auth-context";
-import "./Auth.css";
 
-export function Login() {
+export function Signup() {
   const [form, setForm] = useState({
-    email: "saurabhsuthar@gmail.com",
-    password: "qwerty1234",
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
   });
-  const { login, loading, token } = useAuthProvider();
+  const { signup, loading, token } = useAuthProvider();
   const navigate = useNavigate();
 
-  const loginHandler = (event) => {
+  const signupHandler = (event) => {
     event.preventDefault();
-    login(form.email, form.password);
+    console.log(form);
+    const { email, password, firstName, lastName } = form;
+    signup(email, password, firstName, lastName);
+    setForm({
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+    });
   };
 
   useEffect(() => {
@@ -23,21 +32,56 @@ export function Login() {
   }, [token, navigate]);
 
   const changeHandler = (event) => {
-    const type = event.target.type;
-    if (type === "email") {
+    const id = event.target.id;
+    if (id === "email") {
       setForm((prev) => ({ ...prev, email: event.target.value }));
+    } else if (id === "password") {
+      setForm((prev) => ({ ...prev, password: event.target.value }));
+    } else if (id === "firstName") {
+      setForm((prev) => ({ ...prev, firstName: event.target.value }));
+    } else if (id === "lastName") {
+      setForm((prev) => ({ ...prev, lastName: event.target.value }));
     }
-    setForm((prev) => ({ ...prev, password: event.target.password }));
   };
+
   return (
     <main className="main__form--section">
       <div className="form--container">
         <div className="h6__typography typogrpahy--black bold--typography center__typography">
-          Login
+          Signup
         </div>
-        <form onSubmit={loginHandler} className="form">
+        <form onSubmit={signupHandler} className="form">
           <div className="inputbox__container">
             <input
+              id="firstName"
+              type="text"
+              autoComplete="off"
+              className="input--black"
+              required
+              value={form.firstName}
+              onChange={changeHandler}
+            />
+            <label className="inputbox__label--name label__name--black inputbox__label--blue">
+              <span className="inputbox__label--content">First Name</span>
+            </label>
+          </div>
+          <div className="inputbox__container">
+            <input
+              id="lastName"
+              type="text"
+              autoComplete="off"
+              className="input--black"
+              required
+              value={form.lastName}
+              onChange={changeHandler}
+            />
+            <label className="inputbox__label--name label__name--black inputbox__label--blue">
+              <span className="inputbox__label--content">Last Name</span>
+            </label>
+          </div>
+          <div className="inputbox__container">
+            <input
+              id="email"
               type="email"
               autoComplete="off"
               className="input--black"
@@ -51,6 +95,7 @@ export function Login() {
           </div>
           <div className="inputbox__container">
             <input
+              id="password"
               type="password"
               autoComplete="off"
               className="input--black"
@@ -62,37 +107,21 @@ export function Login() {
               <span className="inputbox__label--content">Password</span>
             </label>
           </div>
-          <div className="row--between">
-            <div className="input--check">
-              <input type="checkbox" name="" id="remember-me" />
-              <label className="subtitle1__typography" htmlFor="rememeber-me">
-                Remember me
-              </label>
-            </div>
-            <Link
-              className="forgot--link subtitle1__typography bold--typography"
-              to="/forgot-password"
-            >
-              Forgot Password
-            </Link>
-          </div>
           <button
             className="button--sm button__solid button--blue button__rounded--md fullwidth-btn bold--typography"
             type="submit"
             disabled={loading}
           >
             <span className="subtitle1__typography typography--white bold--typography">
-              {loading ? "Logging In...." : "Login"}
+              {loading ? "Signing Up...." : "Sign Up"}
             </span>
           </button>
           <button
             className="button--sm button__outline button__outline--blue button__rounded--sm button__icon button__icon fullwidth-btn bold--typography"
-            onClick={() => {
-              navigate("/signup");
-            }}
+            onClick={() => navigate("/login")}
           >
             <span className="subtitle1__typography typography--blue">
-              Create an account
+              Already have an account
             </span>
             <span className="fa fa-arrow-right icon__typography typography--blue"></span>
           </button>
