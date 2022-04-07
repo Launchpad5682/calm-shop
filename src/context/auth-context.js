@@ -14,8 +14,8 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorageToken?.token);
 
   const login = async (
-    email = "adarshbalika@gmail.com",
-    password = "adarshBalika123"
+    email = "saurabhsuthar@gmail.com",
+    password = "qwerty1234"
   ) => {
     try {
       const response = await axios.post("/api/auth/login", {
