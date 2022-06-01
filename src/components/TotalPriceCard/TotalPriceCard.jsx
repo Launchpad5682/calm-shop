@@ -60,6 +60,7 @@ export function TotalPriceCard({ type }) {
       image:
         "https://yifgzyyqlpgydlzwcsaj.supabase.in/storage/v1/object/public/calm-shop-books/calm-shop-logo.png",
       handler: function (response) {
+        dispatch({ type: "SET_CART", payload: [] });
         navigate("/order-summary");
       },
       prefill: {

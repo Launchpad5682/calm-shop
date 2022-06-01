@@ -48,6 +48,7 @@ export function Checkout() {
         ))}
         <SolidButton
           caption="Add Address"
+          export
           icon={<AiOutlinePlus />}
           clickHandler={addAddress}
         />
